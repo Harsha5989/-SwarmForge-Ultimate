@@ -1,0 +1,214 @@
+model_list:
+  # ═══════════════════════════════════════════════════════════════
+  # META AGENTS — spread across multiple free providers
+  # ═══════════════════════════════════════════════════════════════
+  - model_name: meta-agent
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.3
+      max_tokens: 1500
+
+  - model_name: meta-agent
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.3
+      max_tokens: 1500
+
+  - model_name: meta-agent
+    litellm_params:
+      model: openrouter/google/gemma-3-27b-it:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.3
+      max_tokens: 1500
+
+  - model_name: meta-agent
+    litellm_params:
+      model: openrouter/mistralai/mistral-7b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.3
+      max_tokens: 1500
+
+  # ═══════════════════════════════════════════════════════════════
+  # JUDGE AGENT
+  # ═══════════════════════════════════════════════════════════════
+  - model_name: judge-agent
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.1
+      max_tokens: 800
+
+  - model_name: judge-agent
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.1
+      max_tokens: 800
+
+  - model_name: judge-agent
+    litellm_params:
+      model: openrouter/google/gemma-3-27b-it:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.1
+      max_tokens: 800
+
+  # ═══════════════════════════════════════════════════════════════
+  # CODER AGENTS — multiple fallbacks
+  # ═══════════════════════════════════════════════════════════════
+  - model_name: coder-backend
+    litellm_params:
+      model: groq/meta-llama/llama-4-scout-17b-16e-instruct
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-backend
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-backend
+    litellm_params:
+      model: openrouter/google/gemma-3-27b-it:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-backend
+    litellm_params:
+      model: openrouter/qwen/qwen-2.5-72b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-frontend
+    litellm_params:
+      model: groq/meta-llama/llama-4-scout-17b-16e-instruct
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-frontend
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-frontend
+    litellm_params:
+      model: openrouter/google/gemma-3-27b-it:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-database
+    litellm_params:
+      model: groq/meta-llama/llama-4-scout-17b-16e-instruct
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-database
+    litellm_params:
+      model: openrouter/qwen/qwen-2.5-72b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-api
+    litellm_params:
+      model: groq/meta-llama/llama-4-scout-17b-16e-instruct
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  - model_name: coder-api
+    litellm_params:
+      model: openrouter/qwen/qwen-2.5-72b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.05
+      max_tokens: 3000
+
+  # ═══════════════════════════════════════════════════════════════
+  # REVIEWER
+  # ═══════════════════════════════════════════════════════════════
+  - model_name: reviewer-agent
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.2
+      max_tokens: 1500
+
+  - model_name: reviewer-agent
+    litellm_params:
+      model: openrouter/google/gemma-3-27b-it:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.2
+      max_tokens: 1500
+
+  # ═══════════════════════════════════════════════════════════════
+  # QA AGENT
+  # ═══════════════════════════════════════════════════════════════
+  - model_name: qa-agent
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.1
+      max_tokens: 1500
+
+  - model_name: qa-agent
+    litellm_params:
+      model: openrouter/mistralai/mistral-7b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.1
+      max_tokens: 1500
+
+  # ═══════════════════════════════════════════════════════════════
+  # SECURITY AGENT
+  # ═══════════════════════════════════════════════════════════════
+  - model_name: security-agent
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.1
+      max_tokens: 1500
+
+  - model_name: security-agent
+    litellm_params:
+      model: openrouter/mistralai/mistral-7b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.1
+      max_tokens: 1500
+
+  # ═══════════════════════════════════════════════════════════════
+  # OPS AGENTS
+  # ═══════════════════════════════════════════════════════════════
+  - model_name: ops-agent
+    litellm_params:
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
+      temperature: 0.2
+      max_tokens: 1500
+
+  - model_name: ops-agent
+    litellm_params:
+      model: openrouter/mistralai/mistral-7b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      temperature: 0.2
+      max_tokens: 1500
+
+router_settings:
+  routing_strategy: least-busy
+  enable_pre_call_checks: true
+  retry_after: 3
+  allowed_fails: 2
+
+litellm_settings:
+  request_timeout: 120
+  num_retries: 3
+  drop_params: true

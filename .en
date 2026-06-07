@@ -1,0 +1,41 @@
+# ═══════════════════════════════════════════════
+# SwarmForge Ultimate — Environment Configuration
+# ═══════════════════════════════════════════════
+
+# ── API Keys (REQUIRED) ────────────────────────
+GROQ_API_KEY=gsk_your_groq_key_here
+OPENROUTER_API_KEY=sk-or-your_openrouter_key_here
+
+# ── Database ───────────────────────────────────
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=swarmforge
+POSTGRES_USER=swarm
+POSTGRES_PASSWORD=swarmpass123
+DATABASE_URL=postgresql+asyncpg://swarm:swarmpass123@postgres:5432/swarmforge
+
+# ── Redis ──────────────────────────────────────
+REDIS_URL=redis://redis:6379/0
+
+# ── LiteLLM Proxy ─────────────────────────────
+LITELLM_BASE_URL=http://litellm:4000
+LITELLM_API_KEY=sk-swarmforge-local
+
+# ── Pipeline Tuning ───────────────────────────
+MAX_ITERATIONS=5
+BUILD_GATE_MIN_SCORE=80
+TEST_GATE_MIN_COVERAGE=90
+SECURITY_GATE_MIN_SCORE=85
+PERF_GATE_MAX_P95_MS=200
+FINAL_GATE_MIN_SCORE=85
+MAX_RETRIES_PER_GATE=3
+
+# ── Sandbox ───────────────────────────────────
+SANDBOX_CONTAINER=ultimate_worker-sandbox-1
+SANDBOX_TIMEOUT_SEC=120
+OUTPUT_DIR=/workspace/output
+
+# ── App ───────────────────────────────────────
+APP_ENV=development
+LOG_LEVEL=INFO
+SECRET_KEY=changeme-in-production-use-random-32-chars

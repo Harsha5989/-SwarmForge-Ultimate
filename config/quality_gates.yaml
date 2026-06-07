@@ -1,0 +1,26 @@
+gates:
+  build:
+    field: code_quality
+    min_score: 80
+    max_retries: 3
+    weight: 0.30
+  test:
+    field: test_coverage
+    min_coverage: 90
+    max_retries: 3
+    weight: 0.25
+  security:
+    field: security_score
+    min_score: 85
+    max_critical: 0
+    max_retries: 3
+    weight: 0.25
+  performance:
+    field: perf_score
+    max_p95_ms: 200
+    max_retries: 3
+    weight: 0.20
+  final:
+    field: overall
+    min_overall: 85
+    max_iterations: 5
