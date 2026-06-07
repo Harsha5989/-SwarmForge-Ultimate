@@ -58,6 +58,26 @@ async def get_file_content(
         raise HTTPException(status_code=404, detail="File not found")
     return {"file_path": file_path, "content": content}
 
+from pydantic import BaseModel
+class FileUpdateRequest(BaseModel):
+    content: str
+
+@router.put("/files/{file_path:path}")
+async def update_file_content(
+    session_id: UUID,
+    file_path: str,
+    body: FileUpdateRequest,
+    store: BlackboardStore = Depends(get_store),
+):
+    """Update content of a specific generated file."""
+    settings = get_settings()
+    fm = FileManager(settings.output_dir)
+    success = await fm.write_file(str(session_id), file_path, body.content)
+    if not success:
+        raise HTTPException(status_code=500, detail="Failed to write file")
+    return {"status": "success", "file_path": file_path}
+
+
 
 @router.get("/agents")
 async def get_agents(session_id: UUID):

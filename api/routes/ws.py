@@ -2,11 +2,17 @@
 
 import asyncio
 import json
+import os
+import pty
+import fcntl
+import termios
+import struct
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 import structlog
 
 from redis_client import get_redis, RedisClient
+from config import get_settings
 
 log = structlog.get_logger()
 router = APIRouter()
@@ -99,3 +105,60 @@ async def swarm_websocket(websocket: WebSocket, session_id: str):
     finally:
         redis_task.cancel()
         await manager.disconnect(session_id, websocket)
+
+
+@router.websocket("/ws/terminal/{session_id}")
+async def terminal_websocket(websocket: WebSocket, session_id: str):
+    """WebSocket endpoint for an interactive terminal."""
+    await websocket.accept()
+    settings = get_settings()
+    workdir = os.path.join(settings.output_dir, session_id)
+    os.makedirs(workdir, exist_ok=True)
+
+    # Fork a new PTY for bash
+    pid, fd = pty.fork()
+    if pid == 0:
+        # Child process: set working dir and launch bash
+        os.chdir(workdir)
+        os.environ["TERM"] = "xterm-256color"
+        os.execlp("bash", "bash")
+        return
+
+    # Parent process
+    loop = asyncio.get_running_loop()
+
+    # Setup non-blocking read on the PTY
+    flags = fcntl.fcntl(fd, fcntl.F_GETFL)
+    fcntl.fcntl(fd, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+
+    async def pty_reader():
+        while True:
+            try:
+                data = os.read(fd, 1024 * 1024)
+                if data:
+                    await websocket.send_text(data.decode("utf-8", errors="replace"))
+                else:
+                    await asyncio.sleep(0.01)
+            except BlockingIOError:
+                await asyncio.sleep(0.01)
+            except Exception:
+                break
+
+    reader_task = asyncio.create_task(pty_reader())
+
+    try:
+        while True:
+            msg = await websocket.receive_text()
+            try:
+                os.write(fd, msg.encode("utf-8"))
+            except Exception:
+                break
+    except WebSocketDisconnect:
+        pass
+    finally:
+        reader_task.cancel()
+        try:
+            os.close(fd)
+        except Exception:
+            pass
+

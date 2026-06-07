@@ -5,6 +5,7 @@ import SwarmCanvas from './components/SwarmCanvas'
 import QualityDashboard from './components/QualityDashboard'
 import BlackboardPanel from './components/BlackboardPanel'
 import LiveLogStream from './components/LiveLogStream'
+import WorkspacePanel from './components/WorkspacePanel'
 import { Zap, Plus, Wifi, WifiOff, LayoutGrid, Activity, Trash2 } from 'lucide-react'
 
 export default function App() {
@@ -216,7 +217,7 @@ export default function App() {
             {/* Bottom Panel — tabs */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
               <div className="tabs">
-                {['quality', 'blackboard', 'logs'].map((t) => (
+                {['quality', 'blackboard', 'workspace', 'logs'].map((t) => (
                   <button key={t} className={`tab ${bottomTab === t ? 'active' : ''}`}
                     onClick={() => setBottomTab(t)}>
                     {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -226,6 +227,7 @@ export default function App() {
               <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>
                 {bottomTab === 'quality' && <QualityDashboard />}
                 {bottomTab === 'blackboard' && <BlackboardPanel />}
+                {bottomTab === 'workspace' && <WorkspacePanel />}
                 {bottomTab === 'logs' && <LiveLogStream />}
               </div>
             </div>

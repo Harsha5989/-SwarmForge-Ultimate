@@ -32,6 +32,11 @@ export async function getFileContent(id, filePath) {
   return data
 }
 
+export async function saveFileContent(id, filePath, content) {
+  const { data } = await api.put(`/sessions/${id}/files/${filePath}`, { content })
+  return data
+}
+
 export async function getAgents(id) {
   const { data } = await api.get(`/sessions/${id}/agents`)
   return data
