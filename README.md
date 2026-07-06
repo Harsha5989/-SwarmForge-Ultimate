@@ -162,16 +162,6 @@ open http://localhost
 
 ---
 
-## Team Members
-
-| Name | Role | GitHub | LinkedIn |
-|------|------|--------|----------|
-| [Your Name] | Full Stack AI Developer | [@yourgithub](https://github.com/yourgithub) | [LinkedIn](https://linkedin.com/in/yourprofile) |
-| [Member 2] | AI Engineer / Prompt Engineering | [@member2](https://github.com/member2) | [LinkedIn](https://linkedin.com/in/member2) |
-| [Member 3] | UX/UI Designer & Frontend | [@member3](https://github.com/member3) | [LinkedIn](https://linkedin.com/in/member3) |
-
----
-
 ## Contributing
 
 1. Fork the repository
